@@ -1,10 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 {% load static %}
 {% block title %}
 	Home
 {% endblock title%}
 
-{% block content %}
+<!-- {% block content %}
     <div class="hero-container">
       <h3 class="bg-danger">Welcome to <strong>SHOP CART</strong></h3>
 {#      <h1>We're Creative Agency</h1>#}
@@ -12,7 +12,7 @@
       <a href="#about" class="btn-get-started scrollto">SHOP NOW</a>
     </div>
 
-{% endblock content %}
+{% endblock content %} -->
 
 {% block body %}
     <!-- ======= Portfolio Section ======= -->
@@ -45,10 +45,15 @@
                           </strong>
                           </h6>
                           <span id="divpr{{ i.id }}" class="divpr">
-                              <button id="pr{{ i.id }}" class="btn btn-danger cart btn-sm mt-0">Add to cart</button>
+                              <!-- <button id="pr{{ i.id }}" class="btn btn-danger cart btn-sm mt-0">Add to cart</button> -->
+                              <form method="post" action="{% url 'add_to_cart' i.id %}">
+                                {% csrf_token %}
+                                    <input type="number" name="quantity" value="1" min="1">
+                                    <button id="pr{{ i.id }}" class="btn btn-danger cart btn-sm mt-0" type="submit">Add to Cart</button>
+                                </form>
                           </span>
                           <a href="/media/{{ i.image }}">
-                              <button class="btn btn-success btn-sm cart">View</button>
+                              <!-- <button class="btn btn-success btn-sm cart">View</button> -->
                           </a>
 
                       </div>

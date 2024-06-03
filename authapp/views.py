@@ -25,7 +25,7 @@ def signup(request):
         user = User.objects.create_user(email,email,password)
         user.save()
         messages.info(request,"User created successfully.",)
-        return redirect('/auth/login')
+        return redirect('/')
     return render(request,'signup.html')
 
 def handlelogin(request):
@@ -33,17 +33,16 @@ def handlelogin(request):
         username = request.POST['email']
         userpassword = request.POST['pass1']
         myuser = authenticate(username=username,password=userpassword)
-
         if myuser is not None:
             login(request,myuser)
             # messages.success(request,"login successfully.")
-            return redirect('/')
+            return redirect('/app/home/')
         else:
             messages.error(request,"Invalid credentials")
-            return redirect('/auth/login')
+            return redirect('/')
     return render(request,'login.html')
 
 def handlelogout(request):
     logout(request)
     messages.info(request,"logout successfully.")
-    return redirect('/auth/login/')
+    return redirect('/')

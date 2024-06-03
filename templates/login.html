@@ -5,7 +5,7 @@
 {% block content %}
 
 
-    <div class="card bg-light p-5" >
+    <!-- <div  class="card bg-dark p-5" style="display: flex; justify-content: center; align-items: center;">
 
     {#    for messages displayed in template#}
 
@@ -19,26 +19,53 @@
 
 {#    end of messages#}
 
-    <h1 class="text-dark">LOG IN</h1>
-    <form action="/auth/login/" method="post">
+    <h1 class="text-light">LOG IN</h1>
+    <br>
+    <form action="/app/home/" method="post">
     {% csrf_token %}
 
-        <label for="email">Email</label>
+        <label for="email" style="color: aliceblue;">Email</label>
     <div class="form-group">
         <input type="email" class="form-control" id="email" name="email" required>
     </div>
         <br>
 
-        <label for="pass1">Password</label>
+        <label for="pass1" style="color: aliceblue;">Password</label>
     <div class="form-group">
         <input type="password" class="form-control p-2" id="pass1" name="pass1" required>
     </div>
         <br>
 
-    <button type="submit" class="btn btn-primary">Log In</button>
-        <br><br>
-    New User?  <a href="/auth/signup/">Signup here</a>
+    <button type="submit" class="btn btn-danger">Log In</button>
+        <br><br><br>
+    <h6 style="color: aliceblue;">New User?  <a href="/signup/">Signup here</a></h6>
 
+    </form>
+    </div> -->
+
+    <div style="justify-content: center; align-items: center;">
+        <h1 class="text-light">LOG IN</h1>
+    <br>
+    <form action="/" method="post">
+    {% csrf_token %}
+
+        
+    <div class="form-group">
+        <label for="email" style="color: aliceblue;">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+        <br>
+
+        
+    <div class="form-group">
+        <label for="pass1" style="color: aliceblue;">Password</label>
+        <input type="password" class="form-control p-2" id="pass1" name="pass1" required>
+    </div>
+        <br>
+
+    <button type="submit" class="btn btn-danger">Log In</button>
+        <br><br><br>
+    <h6 style="color: aliceblue;">New User?  <a href="/signup/">Signup here</a></h6>
 
     </form>
     </div>

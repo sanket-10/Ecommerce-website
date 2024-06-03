@@ -8,7 +8,7 @@
 
 
 
-    <div class="card bg-light p-3 m-5" >
+    <!-- <div class="card bg-light p-5" >
 {#    for messages displayed in template#}
 
     {% for message in messages %}
@@ -19,33 +19,36 @@
           </div>
     {% endfor %}
 
-{#    end of messages#}
+{#    end of messages#} -->
 
-    <h1 class="text-dark">Sign Up</h1>
-    <form action="/auth/signup/" method="post">
+    <h1 style="color: aliceblue;">Sign Up</h1>
+    <form action="/signup/" method="post">
     {% csrf_token %}
 
-        <label for="email">Email</label>
+        
     <div class="form-group">
+        <label for="email" style="color: aliceblue;">Email</label>
         <input type="email" class="form-control" id="email" name="email" required>
     </div>
         <br>
 
-        <label for="pass1">Password</label>
+        
     <div class="form-group">
+        <label for="pass1" style="color: aliceblue;">Password</label>
         <input type="password" class="form-control p-2" id="pass1" name="pass1" required>
     </div>
         <br>
 
-        <label for="pass2">Confirm Password</label>
+        
     <div class="form-group">
+        <label for="pass2" style="color: aliceblue;">Confirm Password</label>
         <input type="password" class="form-control" id="pass2" name="pass2" required>
     </div>
         <br>
 
     <button type="submit" class="btn btn-primary">Sign Up</button>
         <br><br>
-    Already User?  <a href="/auth/login/">Login here</a>
+    <h6 style="color: aliceblue;">Already User? <a href="/">Login here</a></h6>
 
 
     </form>

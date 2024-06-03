@@ -1,0 +1,15 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+{% for item in cart_items %}
+    <p>{{ item.product.name }} - Quantity: {{ item.quantity }}</p>
+{% empty %}
+    <p>Your cart is empty.</p>
+{% endfor %}
+</body>
+</html>
