@@ -76,10 +76,10 @@ def add_to_cart(request, product_id):
 def view_cart(request):
     cart_items = CartItem.objects.filter(user=request.user)
     print(request)
-    item_list = []
+    # item_list = []
     for item in cart_items:
         print(item.pk)
-        cart_products = Product.objects.get(id=item.pk)
-        item_list.append(cart_products)
+        item_list = Product.objects.get(id=item.pk)
+        # item_list.append(cart_products)
     print(item_list)
     return render(request, 'cart.html', {'cart_items': item_list})

@@ -61,7 +61,11 @@ h6 {
 #header {
   transition: all 0.5s;
   z-index: 997;
-  padding: 20px 0;
+  padding: 5px 0;
+  background: rgba(0, 0, 0, 0.9);
+  position: fixed; /* Make the navbar fixed at the top */
+  width: 100%;
+  top: 0;
 }
 
 #header .logo {
@@ -85,7 +89,7 @@ h6 {
 #header.header-scrolled,
 #header.header-inner-pages {
   background: rgba(0, 0, 0, 0.9);
-  padding: 12px 0;
+  padding: 5px 0;
 }
 
 /*--------------------------------------------------------------
@@ -121,7 +125,7 @@ h6 {
   align-items: center;
   justify-content: space-between;
   font-family: "Poppins", sans-serif;
-  color: #fff;
+  color: #23bf5c;
   font-size: 15px;
   padding: 0 4px;
   white-space: nowrap;
@@ -161,7 +165,7 @@ h6 {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #090909;
+  color: #f5f7fa;
 }
 
 .navbar .dropdown ul {
@@ -228,6 +232,7 @@ h6 {
     left: -100%;
   }
 }
+
 
 /**
 * Mobile Navigation 
@@ -466,20 +471,36 @@ section {
 .section-title {
   text-align: center;
   padding-bottom: 30px;
+  margin-top: 100px;
+}
+
+.section-title h1 {
+  font-size: 30px;
+  letter-spacing: 2px;
+  font-weight: 700;
+  padding: 8px 20px;
+  line-height: 1;
+  margin: 0;
+  background: #161515;
+  color: #1eb65d;
+  display: inline-block;
+  text-transform: uppercase;
+  border-radius: 50px;
 }
 
 .section-title h2 {
-  font-size: 13px;
+  font-size: 30px;
   letter-spacing: 1px;
   font-weight: 700;
   padding: 8px 20px;
   line-height: 1;
   margin: 0;
-  background: #fdeff2;
-  color: #e43c5c;
+  background: #b0c021;
+  color: #1ab047;
   display: inline-block;
   text-transform: uppercase;
   border-radius: 50px;
+  width: 100%;
 }
 
 .section-title h3 {
@@ -1998,4 +2019,12 @@ section {
   background: #d01d3f;
   color: #fff;
   text-decoration: none;
+}
+
+.full-width-bg {
+  display: block; /* Ensure the element is treated as a block element */
+  width: 100%; /* Make the element full width */
+  padding: 10px 0; /* Adjust padding as needed */
+  background-color: #ff5733; /* Replace with your desired background color */
+  color: white; /* Optional: Set text color */
 }

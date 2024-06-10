@@ -54,6 +54,7 @@
           data-pacement="bottom" data-html="true">Cart (<span id="cart">0</span>)</button>
 
             {% if request.user.is_authenticated %}
+                <li><a class="nav-link scrollto" href="/profile"><i class="fa-solid fa-user"></i>My Profile</a></li>
                 <li><a class="nav-link scrollto" href="/logout/">Log Out</a></li>
             {% else %}
                 <li class="dropdown"><a href="#"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a>

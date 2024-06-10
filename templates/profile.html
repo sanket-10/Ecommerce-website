@@ -7,15 +7,19 @@
 
     <section id="portfolio" class="portfolio">
     <div class="container">
-        <h1 class="text-center">My Profile</h1>
+        <div class="section-title">
+            <h1 class="section-title "> My profile </h1>
+          </div>
     </div>
     </section>
 
-    <section>
-        <h2> Personal Details </h2>
-        <h3>Name</h3>
-        <h3>{{ user }}</h3>
-    </section>
+    {% comment %} <section id="portfolio" class="portfolio"> {% endcomment %}
+        
+        <h2 class="section-title"> Personal Details </h2>
+        <h2 class="text-center full-width-bg"> Personal Details </h2>
+        <h3 class="text-center">Name</h3>
+        <h3 class="text-center">{{ user }}</h3>
+    {% comment %} </section> {% endcomment %}
 
 
 
