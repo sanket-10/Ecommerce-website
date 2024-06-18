@@ -1,9 +1,10 @@
-from django.shortcuts import render , redirect
-from .models import Contact , Product, CartItem
+from django.shortcuts import render , redirect, HttpResponse, get_object_or_404
+from .models import Contact , Product, CartItem , Order
 from django.contrib import messages
 from math import ceil
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .forms import OrderForm
 # Create your views here.
 
 
@@ -63,8 +64,8 @@ def add_to_cart(request, product_id):
         # assuming you have a form with quantity input
         quantity = int(request.POST.get('quantity', 1))
         cart_item, created = CartItem.objects.get_or_create(
-            user=request.user,
-            product=product
+            user = request.user,
+            product = product
         )
         cart_item.quantity += quantity
         cart_item.save()
@@ -75,11 +76,41 @@ def add_to_cart(request, product_id):
 @login_required(login_url="/")
 def view_cart(request):
     cart_items = CartItem.objects.filter(user=request.user)
-    print(request)
-    # item_list = []
-    for item in cart_items:
-        print(item.pk)
-        item_list = Product.objects.get(id=item.pk)
-        # item_list.append(cart_products)
-    print(item_list)
+    item_list = []
+    for cart_item in cart_items:
+        product = cart_item.product
+        quantity = cart_item.quantity
+        user = cart_item.user
+        image = Product.objects.get(product_name=product).image
+        id = cart_item.id
+        price = Product.objects.get(product_name=product).price
+        item_dict = {
+            "user" : user,
+            "name" : product,
+            "quantity" : quantity,
+            "image":image,
+            "id" : id,
+            "price" : price*quantity,
+        } 
+        item_list.append(item_dict)
+    # print(item_list)
     return render(request, 'cart.html', {'cart_items': item_list})
+
+
+def remove_cart_item(request,id):
+    # id = request.data.get('id')
+    if request.method == "POST":
+        cart_item = get_object_or_404(CartItem, id=id)
+        cart_item.delete()
+    return redirect(view_cart)
+
+
+def checkout(request,id):
+    print("iiiiiiiiiiidddddddddddddddddddddddd",id)
+    form = OrderForm
+    product = Product.objects.get(id=id)
+    print(product.price)
+    if request.method == "POST":
+        
+        return render("Thank you for shopping...........?")
+    return render(request,"checkout.html",{"form": form,"product":product})

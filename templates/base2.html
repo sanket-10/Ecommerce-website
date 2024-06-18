@@ -57,7 +57,7 @@
         <ul>
           <li><a class="nav-link scrollto " href="/app/home/">Home<i class="gg-home-alt"></i></a></li>
           <!-- <li><a class="nav-link scrollto" href="/blog">Blog</a></li> -->
-          <li><a class="nav-link scrollto" href="/app/about/">About</a></li>
+          {% comment %} <li><a class="nav-link scrollto" href="/app/about/">About</a></li> {% endcomment %}
           <li><a class="nav-link scrollto" href="#">Orders<i class="gg-shopping-bag"></i></a></li>
           <!-- <li><a class="nav-link scrollto" href="/about">Checkout</a></li> -->
           <li><a class="nav-link scrollto" href="/app/profile/">My Profile<i class="gg-profile"></i></a></li>
@@ -65,20 +65,33 @@
           <!-- <button type="button" class="nav-link scrollto bg-danger p-3 m-2 text-white" id="popcart" data-container="body" data-toggle="popover"
           data-pacement="bottom" data-html="true"><i class="gg-add-r"></i>Cart</button> -->
 
-            {% if request.user.is_authenticated %}
+            {% comment %} {% if request.user.is_authenticated %}
                 <li><a class="nav-link scrollto" href="/logout/">Log Out<i class="gg-log-out"></i></a></li>
             {% else %}
-                <li class="dropdown"><a href="#"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
+                <li class="dropdown"><a href="#"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a> {% endcomment %}
+            {% comment %} <ul>
               <li><a href="signup/">Sign Up</a></li>
               <li><a href="/">Log In</a></li>
 
             </ul>
           </li>
 
-            {% endif %}
+            {% endif %} {% endcomment %}
 
-          <li><a class="nav-link scrollto bg-dark p-3 m-2" href="/app/contact/">Contact</a></li>
+          {% comment %} <li><a class="nav-link scrollto p-3 m-2" href="/app/contact/">Contact</a></li> {% endcomment %}
+          {% if request.user.is_authenticated %}
+          <li><a class="nav-link scrollto p-3 m-2" href="/app/contact/">Contact</a></li>
+              <li><a class="nav-link scrollto" href="/logout/">Log Out<i class="gg-log-out"></i></a></li>
+          {% else %}
+            <li class="dropdown"><a href="#"><span>Sign In</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="signup/">Sign Up</a></li>
+                <li><a href="/">Log In</a></li>
+  
+              </ul>
+            </li>
+  
+              {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

@@ -10,8 +10,12 @@
 <section id="portfolio" class="portfolio">
     <div class="container">
         <div class="section-title">
-            <h1>Your Cart</h1>
+            <h1>Place Your Order</h1>
         </div>
+        <div>
+            {{ form.as_p }}
+        </div>
+        {{ product.price * 5 }}
         <div class="row">
             {% for item in cart_items %}
             <div class="col-md-3 mb-4">
@@ -32,7 +36,7 @@
                                 <button id="pr{{ item.id }}" class="btn btn-dark cart btn-sm mt-0" type="submit">Remove</button>
                             </form>
                             <br><br><br> 
-                        <a class="btn btn-danger cart btn-sm mt-0" href="{% url 'checkout' item.id %}">Order Now</a>
+                        <a class="btn btn-danger cart btn-sm mt-0" href="/app/order/">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -44,40 +48,4 @@
     </div>
 </section>
 
-    
-    {% comment %} <section id="portfolio" class="portfolio">
-        <div class="container">
-  
-          <div class="section-title">
-            <h1>Your Cart</h1>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        {% for item in cart_items %}
-                        <div class="row">
-                            <div class="col-md-4">
-                                
-                                <div class="card">
-                                    <h5 class="card-header">
-                                        {{ item.name }}
-                                    </h5>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            <img src="/media/{{ item.image }}" class="card-img-top" alt="not found" height="300px" width="100px">
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        {{ item.quantity }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-          </div>  
-        </div>
-      </section> {% endcomment %}
-    
 {% endblock body %}

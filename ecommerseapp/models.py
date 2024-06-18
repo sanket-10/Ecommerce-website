@@ -31,3 +31,14 @@ class CartItem(models.Model):
 
     def __str__(self):
         return str(self.product.pk)
+    
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    address = models.CharField(max_length=100)
+    pincode = models.IntegerField()
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    contact_no = models.IntegerField()
