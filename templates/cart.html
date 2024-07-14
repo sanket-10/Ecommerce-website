@@ -32,7 +32,7 @@
                                 <button id="pr{{ item.id }}" class="btn btn-dark cart btn-sm mt-0" type="submit">Remove</button>
                             </form>
                             <br><br><br> 
-                        <a class="btn btn-danger cart btn-sm mt-0" href="{% url 'checkout' item.id %}">Order Now</a>
+                        <a class="btn btn-danger cart btn-sm mt-0" href="{% url 'place_order' item.id %}">Order Now</a>
                     </div>
                 </div>
             </div>

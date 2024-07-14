@@ -1,5 +1,17 @@
 {% extends 'base2.html' %}
 {% load static %}
+{% block head %}
+{% comment %} <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        <--height: 10vh;-->
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+</style> {% endcomment %}
+{% endblock head %}
 {% block title %}
 	Cart
 {% endblock title%}
@@ -7,43 +19,88 @@
 
 {% block body %}
 
-<section id="portfolio" class="portfolio">
+<section id="portfolio" class="portfolio"">
     <div class="container">
         <div class="section-title">
-            <h1>Place Your Order</h1>
+            <h1>Place Order</h1>
         </div>
-        <div>
-            {{ form.as_p }}
-        </div>
-        {{ product.price * 5 }}
-        <div class="row">
-            {% for item in cart_items %}
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
-                    <h5 class="card-header">
-                        {{ item.name|slice:"0:53" }}...
-                    </h5>
-                    <div class="card-body">
-                        <img src="/media/{{ item.image }}" class="card-img-top" alt="Product Image" style="height: 300px; width: 100%;">
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <div>Quantity: {{ item.quantity }}<br>
-                            Total Price : {{ item.price }}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card text-black">
+                                        <h5 class="card-header">
+                                            {{ product.product_name }}
+                                        </h5>
+                                        <div class="card-body">
+                                            <img src="/media/{{ product.image }}" class="card-img-top" alt="Product Image" style="height: 50%; width: 50%;">
+                                        </div>
+                                        <div class="card-footer">
+                                            {{ product.desc }}
+                                            <br>
+                                            <h4>Price : ₹{{ product.price }}</h4> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <form method="post" action="{% url 'remove' item.id %}">
-                            {% csrf_token %}
-                                {% comment %} <input type="number" name="quantity" value="1" min="1"> {% endcomment %}
-                                <button id="pr{{ item.id }}" class="btn btn-dark cart btn-sm mt-0" type="submit">Remove</button>
-                            </form>
-                            <br><br><br> 
-                        <a class="btn btn-danger cart btn-sm mt-0" href="/app/order/">Order Now</a>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+
+        
+                                            <div class="form-group">
+                                                <label for="name" style="color: black;">Name :</label>
+                                                <input type="text" class="" id="name" name="name" required>
+                                            </div>
+                                                <br>
+
+                                                
+                                            <div class="form-group">
+                                                <label for="address" style="color: black;">Address</label>
+                                                <input type="text" class="form-control p-2" id="address" name="address" required>
+                                            </div>
+                                                <br>
+
+                                                
+                                            <div class="form-group">
+                                                <label for="city" style="color: black;">City</label>
+                                                <input type="text" class="form-control" id="city" name="city" required>
+                                            </div>
+                                                <br>
+                                            
+                                                <div class="form-group">
+                                                    <label for="country" style="color: black;">Country</label>
+                                                    <input type="text" class="form-control" id="country" name="country" required>
+                                                </div>
+                                                    <br>
+
+                                                    <div class="form-group">
+                                                        <label for="pincode" style="color: black;">PinCode</label>
+                                                        <input type="text" class="" id="pincode" name="pincode" required>
+                                                    </div>
+                                                        <br>
+
+                                                        <div class="form-group">
+                                                            <label for="contact_number" style="color: black;">Contact Number</label>
+                                                            <input type="number" value="India" class="form-control" id="contact_number" name="contact_number" required>
+                                                        </div>
+                                                            <br>
+
+                                            <button type="submit" class="btn btn-danger">Place Order</button>
+                                                <br><br>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% if forloop.counter|divisibleby:4 and not forloop.last %}
-                </div><div class="row">
-            {% endif %}
-            {% endfor %}
         </div>
     </div>
 </section>

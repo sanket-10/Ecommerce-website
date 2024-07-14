@@ -4,6 +4,35 @@
 	Home
 {% endblock title%}
 
+{% block head %} 
+<style>
+    .input-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 150px; /* Adjust width as needed */
+    }
+    .input-group button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 5px 10px;
+    }
+    .input-group button:focus {
+        outline: none;
+    }
+    .input-group input {
+        width: 70px; /* Adjust width as needed */
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+</style>
+{% endblock head %}
+
 <!-- {% block content %}
     <div class="hero-container">
       <h3 class="bg-danger">Welcome to <strong>SHOP CART</strong></h3>
@@ -48,7 +77,12 @@
                               <!-- <button id="pr{{ i.id }}" class="btn btn-danger cart btn-sm mt-0">Add to cart</button> -->
                               <form method="post" action="{% url 'add_to_cart' i.id %}">
                                 {% csrf_token %}
-                                    <input type="number" name="quantity" value="1" min="1">
+                                    {% comment %} <input type="number" name="quantity" value="1" min="1"> {% endcomment %}
+                                    <div class="input-group">
+                                        <button id="subtract">-</button>
+                                        <input type="text" id="quantity" value="1">
+                                        <button id="add">+</button>
+                                    </div>
                                     <button id="pr{{ i.id }}" class="btn btn-dark cart btn-sm mt-0" type="submit">Add to Cart</button>
                                 </form>
                           </span>
@@ -153,7 +187,38 @@
 
 {#    if plus or minus button is clicked change the cart as well as the display value#}
 
+<script>
+    document.getElementById('add').addEventListener('click', function() {
+        incrementValue();
+    });
 
+    document.getElementById('subtract').addEventListener('click', function() {
+        decrementValue();
+    });
+
+    function incrementValue() {
+        var value = parseInt(document.getElementById('quantity').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('quantity').value = value;
+    }
+
+    function decrementValue() {
+        var value = parseInt(document.getElementById('quantity').value, 10);
+        value = isNaN(value) ? 0 : value;
+        if (value > 1) {
+            value--;
+            document.getElementById('quantity').value = value;
+        }
+    }
+    // Prevent form submission on button clicks
+        var addToCartForm = document.getElementById('addToCartForm');
+        addToCartForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Manually submit the form via JavaScript if needed
+            // Example: addToCartForm.submit();
+        });
+</script>
 
 
 {% endblock body %}

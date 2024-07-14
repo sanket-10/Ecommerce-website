@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Circular Image</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .circle {
+            width: 300px; /* Diameter of the circle */
+            height: 300px; /* Diameter of the circle */
+            border-radius: 50%; /* Makes it circular */
+            overflow: hidden; /* Ensures content within the circle is not visible outside */
+            position: relative; /* Allows absolute positioning of images inside */
+            background-color: white; /* Ensures the background is white */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+        }
+        .circle img {
+            width: 100%; /* Ensures the image takes up the full space of its container */
+            height: auto; /* Maintains aspect ratio of the image */
+            position: absolute; /* Positions the image relative to its circle container */
+            top: 50%; /* Moves image to the center of the circle */
+            left: 50%; /* Moves image to the center of the circle */
+            transform: translate(-50%, -50%); /* Centers the image exactly in the circle */
+        }
+    </style>
+</head>
+<body style="background:black">
+    <div class="circle">
+        <img src="virat kohli.png" alt="Image Description">
+    </div>
+</body>
+</html>

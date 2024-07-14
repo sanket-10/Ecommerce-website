@@ -48,11 +48,12 @@ def profile(request):
         messages.warning(request,"please login and try again.")
         return redirect('/auth/login')
     currentuser_name = request.user.username
-    # print(currentuser_name,"-------------------------------")
+    print(currentuser_name,"-------------------------------")
     user_details = User.objects.get(username=currentuser_name)
-    # print(user_details)
+    profile_image = "media\images\images\virat kohli.png" 
+    print(user_details)
 
-    return render(request,'profile.html',{"user":user_details})
+    return render(request,'profile.html',{"user":user_details,"profile_image":profile_image})
 
 
 
@@ -105,12 +106,23 @@ def remove_cart_item(request,id):
     return redirect(view_cart)
 
 
-def checkout(request,id):
-    print("iiiiiiiiiiidddddddddddddddddddddddd",id)
+def place_order(request,id):
+    # print("iiiiiiiiiiidddddddddddddddddddddddd",id)
     form = OrderForm
-    product = Product.objects.get(id=id)
-    print(product.price)
+    cartitem = CartItem.objects.get(id=id)
+    print(cartitem.product.id)
+    product = Product.objects.get(id=cartitem.product.id)
+    print(product,"----------------------")
+    # print(product.price,"============") 
     if request.method == "POST":
         
         return render("Thank you for shopping...........?")
     return render(request,"checkout.html",{"form": form,"product":product})
+
+
+
+# def place_order(request):
+#     if request.method == "POST":
+#         print("place order.......")
+#         return redirect("/home/")
+#     return render(request, "place_order.html")
