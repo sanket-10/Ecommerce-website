@@ -106,8 +106,11 @@ def remove_cart_item(request,id):
     return redirect(view_cart)
 
 
+
+
 def place_order(request,id):
     # print("iiiiiiiiiiidddddddddddddddddddddddd",id)
+    print(request.user,"==========================")
     form = OrderForm
     cartitem = CartItem.objects.get(id=id)
     print(cartitem.product.id)
