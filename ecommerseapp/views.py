@@ -64,11 +64,18 @@ def add_to_cart(request, product_id):
     if request.method == 'POST':
         # assuming you have a form with quantity input
         quantity = int(request.POST.get('quantity', 1))
-        cart_item, created = CartItem.objects.get_or_create(
-            user = request.user,
-            product = product
-        )
-        cart_item.quantity += quantity
+        try:
+            cart_item = CartItem.objects.get(product=product,user=request.user)
+            print(cart_item,"------------------")
+            cart_item.quantity += quantity
+        except Exception as e:
+            cart_item = CartItem.objects.create(
+                user = request.user,
+                product = product,
+                quantity = quantity
+            )
+            # if not created:
+            #     cart_item.quantity += quantity
         cart_item.save()
         return redirect('cart')
 
@@ -107,20 +114,17 @@ def remove_cart_item(request,id):
 
 
 
-
+@login_required(login_url="/")
 def place_order(request,id):
-    # print("iiiiiiiiiiidddddddddddddddddddddddd",id)
-    print(request.user,"==========================")
     form = OrderForm
     cartitem = CartItem.objects.get(id=id)
-    print(cartitem.product.id)
     product = Product.objects.get(id=cartitem.product.id)
-    print(product,"----------------------")
-    # print(product.price,"============") 
     if request.method == "POST":
-        
-        return render("Thank you for shopping...........?")
-    return render(request,"checkout.html",{"form": form,"product":product})
+        # data = request.body
+        orderForm = OrderForm(request.body)
+        orderForm.save()
+        return HttpResponse("Thank you for shopping...........?")
+    return render(request,"place_order.html",{"form": form,"product":cartitem})
 
 
 

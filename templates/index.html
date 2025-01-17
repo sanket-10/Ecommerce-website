@@ -75,13 +75,13 @@
                           </h6>
                           <span id="divpr{{ i.id }}" class="divpr">
                               <!-- <button id="pr{{ i.id }}" class="btn btn-danger cart btn-sm mt-0">Add to cart</button> -->
-                              <form method="post" action="{% url 'add_to_cart' i.id %}">
+                                  <form method="post" action="{% url 'add_to_cart' i.id %}">
                                 {% csrf_token %}
                                     {% comment %} <input type="number" name="quantity" value="1" min="1"> {% endcomment %}
                                     <div class="input-group">
-                                        <button id="subtract">-</button>
-                                        <input type="text" id="quantity" value="1">
-                                        <button id="add">+</button>
+                                        <button id="subtract" onclick="addRemoveItem(event,quantity{{ i.id }},false)">-</button>
+                                        <input type="text" id="quantity{{ i.id }}" name="quantity" value="1">
+                                        <button id="add" onclick="addRemoveItem(event,quantity{{ i.id }},true)">+</button>
                                     </div>
                                     <button id="pr{{ i.id }}" class="btn btn-dark cart btn-sm mt-0" type="submit">Add to Cart</button>
                                 </form>
@@ -114,110 +114,17 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 
 
-
-{#    find out the card from local storage#}
-{% comment %} 
-    if (localStorage.getItem('cart') == null) {
-    var cart = {};
-    } else {
-    cart = JSON.parse(localStorage.getItem('cart'));
-    updateCart(cart);
-    }
-
-{#    add or increment code#}
-
-    $('.divpr').on('click','button.cart', function()  {
-    var idstr = this.id.toString();
-    console.log(idstr)
-
-    if (cart[idstr] ≠ undefined) {
-    qty = cart[idstr][0] + 1;
-    }
-    else {
-    qty = 1;
-    name = document.getElementById('name' + idstr).innerHTML;
-    price = document.getElementById('price' + idstr).innerHTML;
-    cart[idstr] = [qty, name, price];
-    }
-
-    updateCart(cart);
-    localStorage.setItem('cart' , JSON.stringify(cart));
-    document.getElementById('cart').innerHTML = Object.keys(cart).length;
-    console.log( Object.keys(cart).length)
-    document.getElementById("popcart").click();
-    });
-
-{#    add pop over to cart #}
-
-    $("#popcart").popover();
-
-    updatePopover(cart);
-    function updatePopover(cart) {
-
-    console.log('we are inside update popover');
-    var popStr = "";
-    var popStr = popStr + "<h5> cart for your items in my shopping cart </h5>"
-    var i = 1;
-    for (car item in cart) {
-        popStr = popStr + "<b>" + i + "</b>. ";
-        popStr = popStr + document.getElementById('name' + item).innerHTML.slice
-        (0,19) + "..." + "<b>" + cart[item][0] + "</b>" + "Qty" + '<br>' ;
-        i = i + 1;
-    }
-
-    pop Str = popStr + "<div> <a href="/checkout"><button class="btn
-    btn-success" id="clearCart">Checkout</button></a> <button class="btn btn-dark" onclick="clearCart"></button></div>"
-    document.getElementById('popCart').setAttribute('data-content',popStr);
-    $('#popcart').popover('show');
-    document.getElementById('popcart').click();
-    }
-
-    function clearCart() {
-    cart = JSON.parse(localStorage.getItem('cart'));
-    for (var item in cart) {
-        document.getElementById('div' + item).innerHTML = '<button id=" ' + item + '" class="btn btn-danger cart">Add to Cart</button>'
-    }
-    localStorage.clear();
-    cart = {};
-    updateCart(cart);
-
-    let clear= document.getElementById("popcart").click();
-    document.getElementById("popcart").click();
-    } {% endcomment %}
-
-{#    if plus or minus button is clicked change the cart as well as the display value#}
-
 <script>
-    document.getElementById('add').addEventListener('click', function() {
-        incrementValue();
-    });
 
-    document.getElementById('subtract').addEventListener('click', function() {
-        decrementValue();
-    });
+// function to plus the item
+    function addRemoveItem(event,inputId,add){
+    event.preventDefault();
+    let value = inputId.value
 
-    function incrementValue() {
-        var value = parseInt(document.getElementById('quantity').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value++;
-        document.getElementById('quantity').value = value;
+    inputId.value = add ? ++value : Number(value) ? --value : value
     }
 
-    function decrementValue() {
-        var value = parseInt(document.getElementById('quantity').value, 10);
-        value = isNaN(value) ? 0 : value;
-        if (value > 1) {
-            value--;
-            document.getElementById('quantity').value = value;
-        }
-    }
-    // Prevent form submission on button clicks
-        var addToCartForm = document.getElementById('addToCartForm');
-        addToCartForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            // Manually submit the form via JavaScript if needed
-            // Example: addToCartForm.submit();
-        });
+
 </script>
 
 
