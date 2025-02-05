@@ -5,6 +5,7 @@ from math import ceil
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import OrderForm
+from django.shortcuts import get_list_or_404
 # Create your views here.
 
 
@@ -120,16 +121,27 @@ def place_order(request,id):
     cartitem = CartItem.objects.get(id=id)
     product = Product.objects.get(id=cartitem.product.id)
     if request.method == "POST":
-        # data = request.body
-        orderForm = OrderForm(request.body)
-        orderForm.save()
-        return HttpResponse("Thank you for shopping...........?")
+        data = request.POST
+        order = Order.objects.create(
+            user = request.user,
+            product = product,
+            quantity = cartitem.quantity,
+            address = data.get('address'),
+            city = data.get('city'),
+            country = data.get('country'),
+            pincode = data.get('pincode'),
+            contact_no = data.get('contact_number')
+        )
+        order.save()
+        cartitem.delete()
+        return redirect(oderPage)
     return render(request,"place_order.html",{"form": form,"product":cartitem})
 
 
-
-# def place_order(request):
-#     if request.method == "POST":
-#         print("place order.......")
-#         return redirect("/home/")
-#     return render(request, "place_order.html")
+@login_required(login_url="/")
+def oderPage(request):
+    orders = Order.objects.filter(user=request.user)
+    item_list = []
+    for item in orders:
+        item_list.append(item.product)
+    return render(request, "order.html", context={'orders':item_list})

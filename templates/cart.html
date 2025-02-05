@@ -45,39 +45,39 @@
 </section>
 
     
-    {% comment %} <section id="portfolio" class="portfolio">
-        <div class="container">
-  
-          <div class="section-title">
-            <h1>Your Cart</h1>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        {% for item in cart_items %}
-                        <div class="row">
-                            <div class="col-md-4">
-                                
-                                <div class="card">
-                                    <h5 class="card-header">
-                                        {{ item.name }}
-                                    </h5>
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            <img src="/media/{{ item.image }}" class="card-img-top" alt="not found" height="300px" width="100px">
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        {{ item.quantity }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-          </div>  
-        </div>
-      </section> {% endcomment %}
+<!--    {% comment %} <section id="portfolio" class="portfolio">-->
+<!--        <div class="container">-->
+<!--  -->
+<!--          <div class="section-title">-->
+<!--            <h1>Your Cart</h1>-->
+<!--            <div class="container-fluid">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-md-12">-->
+<!--                        {% for item in cart_items %}-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-4">-->
+<!--                                -->
+<!--                                <div class="card">-->
+<!--                                    <h5 class="card-header">-->
+<!--                                        {{ item.name }}-->
+<!--                                    </h5>-->
+<!--                                    <div class="card-body">-->
+<!--                                        <p class="card-text">-->
+<!--                                            <img src="/media/{{ item.image }}" class="card-img-top" alt="not found" height="300px" width="100px">-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                    <div class="card-footer">-->
+<!--                                        {{ item.quantity }}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        {% endfor %}-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--          </div>  -->
+<!--        </div>-->
+<!--      </section> {% endcomment %}-->
     
 {% endblock body %}

@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base2.html' %}
+{% load static %}
+{% block head %}
+{% comment %} <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        <--height: 10vh;-->
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+</style> {% endcomment %}
+{% endblock head %}
+{% block title %}
+	Cart
+{% endblock title%}
+
+
+{% block body %}
+
+<section id="portfolio" class="portfolio">
+    <h1>Orders page</h1>
+{% for order in orders %}
+    <div>
+    {{ order.id }}
+    </div>
+    <div>
+    {{ order.product_name }}
+    </div>
+    <div>
+        <img src="/media/{{ order.image }}" class="" alt="" style="">
+<!--    {{ order.image }}-->
+    </div>
+    <div>
+    {{ order.desc }}
+    </div>
+    <br>
+
+
+    {% endfor %}
+
+
+
+</section>
+{% endblock body %}
